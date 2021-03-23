@@ -1,0 +1,60 @@
+﻿@model BakeryWebApp.ViewModels.RawViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<p>
+    <a asp-action="Create">Добавить</a>
+</p>
+<p><a asp-action="ClearCache">Очистить фильтр</a></p>
+@using (Html.BeginForm("Index", "Raws", FormMethod.Get))
+{
+    <fieldset>
+        Наименование сырья: @Html.TextBox("rawName", Model.RawName)
+        <input class="btn btn-outline-dark" type="submit" value="Найти" />
+    </fieldset>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Raws.FirstOrDefault().RawName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Raws)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RawName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.RawId">Изменить</a> |
+                    <a asp-action="Delete" asp-route-id="@item.RawId">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (Model.PageViewModel.HasPreviousPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+       class="btn btn-outline-dark">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Назад
+    </a>
+}
+@if (Model.PageViewModel.HasNextPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+       class="btn btn-outline-dark">
+        Вперед
+        <i class="glyphicon glyphicon-chevron-right"></i>
+    </a>
+}

@@ -1,0 +1,40 @@
+﻿@model BakeryWebApp.ViewModels.ReportViewModel
+
+@using (Html.BeginForm("Index", "Report", FormMethod.Get))
+{
+    <fieldset>
+        <div class="form-group">
+            <input asp-for="DailyDate" class="form-control" />
+            <span asp-validation-for="DailyDate" class="text-danger"></span>
+        </div>
+        <input class="btn btn-outline-dark" type="submit" value="Сформировать суточный отчёт" />
+
+    </fieldset>
+}
+<p>
+    @using (Html.BeginForm("Index", "Report", FormMethod.Get))
+    {
+        <fieldset>
+
+            <label>Начало периода отчёта</label>
+            <div class="form-group">
+                <input asp-for="BeginDate" class="form-control" />
+                <span asp-validation-for="BeginDate" class="text-danger"></span>
+            </div>
+            <label>Конец периода отчёта</label>
+            <div class="form-group">
+                <input asp-for="EndDate" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <input class="btn btn-outline-dark" type="submit" value="Сформировать отчёт периода" />
+        </fieldset>
+    }
+</p>
+<p>
+    @using (Html.BeginForm("Statistic", "Report", FormMethod.Get))
+    {
+        <fieldset>
+            <input class="btn btn-outline-dark" type="submit" value="Сформировать статистику" />
+        </fieldset>
+    }
+</p>

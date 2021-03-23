@@ -1,0 +1,34 @@
+﻿@model BakeryWebApp.Raw
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Изменение</h1>
+
+<h4>Сырье</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="RawId" />
+            <div class="form-group">
+                <label asp-for="RawName" class="control-label"></label>
+                <input asp-for="RawName" class="form-control" />
+                <span asp-validation-for="RawName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Назад</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,76 @@
+﻿@model BakeryWebApp.ViewModels.ProductMaterialViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<p>
+    <a asp-action="Create">Добавить</a>
+</p>
+<p><a asp-action="ClearFilter">Очистить фильтр</a></p>
+@using (Html.BeginForm("Index", "ProductsMaterials", FormMethod.Get))
+{
+    <fieldset>
+        Наименование изделия: @Html.TextBox("productName", Model.ProductionName)
+        Наименование материала: @Html.TextBox("materialName", Model.MaterialName)
+        Количество сырья: @Html.TextBox("quantity", Model.Quantity)
+        <input class="btn btn-outline-dark" type="submit" value="Найти" />
+    </fieldset>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortState=@Model.SortViewModel.ProductMaterialQuantitySort>
+                @Html.DisplayNameFor(model => model.ProductsMaterials.FirstOrDefault().Quantity)</a>
+</th>
+            <th>
+                <a asp-action="Index" asp-route-sortState=@Model.SortViewModel.ProductMaterialMaterialSort>
+                @Html.DisplayNameFor(model => model.ProductsMaterials.FirstOrDefault().Material.MaterialName)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortState=@Model.SortViewModel.ProductMaterialProductSort>
+                 @Html.DisplayNameFor(model => model.ProductsMaterials.FirstOrDefault().Product.ProductName)</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ProductsMaterials)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Material.MaterialName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.ProductName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ProductMaterial">Изменить</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ProductMaterial">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (Model.PageViewModel.HasPreviousPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+       class="btn btn-outline-dark">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Назад
+    </a>
+}
+@if (Model.PageViewModel.HasNextPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+       class="btn btn-outline-dark">
+        Вперед
+        <i class="glyphicon glyphicon-chevron-right"></i>
+    </a>
+}

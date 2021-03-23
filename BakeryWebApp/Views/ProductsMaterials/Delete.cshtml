@@ -1,0 +1,38 @@
+﻿@model BakeryWebApp.ProductsMaterial
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Удаление</h1>
+
+<div>
+    <h4>Материал в изделиях</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Material.MaterialName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Material.MaterialName)
+        </dd class>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Product.ProductName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Product.ProductName)
+        </dd class>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ProductMaterial" />
+        <input type="submit" value="Удалить" class="btn btn-danger" /> |
+        <a asp-action="Index">Назад</a>
+    </form>
+</div>
