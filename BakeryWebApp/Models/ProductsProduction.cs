@@ -12,7 +12,7 @@ namespace BakeryWebApp
         public int ProductProductionId { get; set; }
         public int? DayProductionId { get; set; }
         public int? ProductId { get; set; }
-        [Display(Name = "Количество")]
+        [Display(Name = "Количество изделий")]
         [Range(1, int.MaxValue)]
         public int? Count { get; set; }
 

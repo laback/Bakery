@@ -1,40 +1,47 @@
 ﻿@model BakeryWebApp.ViewModels.ReportViewModel
 
-@using (Html.BeginForm("Index", "Report", FormMethod.Get))
-{
-    <fieldset>
-        <div class="form-group">
-            <input asp-for="DailyDate" class="form-control" />
-            <span asp-validation-for="DailyDate" class="text-danger"></span>
+<div class="row">
+
+    <div class="col-md-4">
+        <div class="text-left">
+            <h1>
+                Дневной отчёт
+            </h1>
         </div>
-        <input class="btn btn-outline-dark" type="submit" value="Сформировать суточный отчёт" />
+        @using (Html.BeginForm("Index", "Report", FormMethod.Get))
+        {
+            <label>Дата</label>
+            <input asp-for="DailyDate" />
+            <input class="btn btn-outline-dark" type="submit" value="Сформировать суточный отчёт" />
+        }
+    </div>
 
-    </fieldset>
-}
-<p>
-    @using (Html.BeginForm("Index", "Report", FormMethod.Get))
-    {
-        <fieldset>
-
-            <label>Начало периода отчёта</label>
-            <div class="form-group">
-                <input asp-for="BeginDate" class="form-control" />
-                <span asp-validation-for="BeginDate" class="text-danger"></span>
-            </div>
-            <label>Конец периода отчёта</label>
-            <div class="form-group">
-                <input asp-for="EndDate" class="form-control" />
-                <span asp-validation-for="EndDate" class="text-danger"></span>
-            </div>
+    <div class="col-md-4">
+        <div class="text-left">
+            <h1>
+                Отчёт периода
+            </h1>
+        </div>
+        @using (Html.BeginForm("Index", "Report", FormMethod.Get))
+        {
+            <label>Начало периода</label>
+            <input asp-for="BeginDate" />
+            <label>Конец периода</label>
+            <input asp-for="EndDate" />
             <input class="btn btn-outline-dark" type="submit" value="Сформировать отчёт периода" />
-        </fieldset>
-    }
-</p>
-<p>
-    @using (Html.BeginForm("Statistic", "Report", FormMethod.Get))
-    {
-        <fieldset>
+        }
+    </div>
+
+    <div class="col-md-4">
+        <div class="text-left">
+            <h1>
+                Статистика
+            </h1>
+        </div>
+        @using (Html.BeginForm("Statistic", "Report", FormMethod.Get))
+        {
             <input class="btn btn-outline-dark" type="submit" value="Сформировать статистику" />
-        </fieldset>
-    }
-</p>
+        }
+    </div>
+
+</div>

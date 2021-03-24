@@ -22,7 +22,7 @@ namespace BakeryWebApp.Controllers
             _memoryCache = cache;
         }
 
-        public IActionResult Index(DateTime planDate, string productName, SortState sortState, int countOfProd, int page = 1)
+        public IActionResult Index(DateTime planDate, SortState sortState, int countOfProd, string productName, int page = 1)
         {
             IEnumerable<ProductsPlan> productsPlans = _context.ProductsPlans.Include(p => p.DayPlan).Include(p => p.Product);
             if (planDate == default)

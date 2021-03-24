@@ -3,54 +3,67 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<p>
-    <a asp-action="Create">Добавить</a>
-</p>
-<p><a asp-action="ClearFilter">Очистить фильтр</a></p>
-@using (Html.BeginForm("Index", "Norms", FormMethod.Get))
-{
-    <fieldset>
-        Наименование изделия: @Html.TextBox("productName", Model.ProductionName)
-        Наименование сырья: @Html.TextBox("rawName", Model.RawName)
-        Количество сырья: @Html.TextBox("quantity", Model.Quantity)
-        <input class="btn btn-outline-dark" type="submit" value="Найти" />
-    </fieldset>
-}
+<div class="bg-light">
+    <div class="text-center"><h1>Нормы сырья</h1></div>
+    <div class="row, text-left">
+        <p>
+            <a class="btn btn-outline-dark" asp-action="Create">Добавить</a>
+            <a class="btn btn-outline-dark" asp-action="ClearFilter">Очистить фильтр</a>
+        </p>
+    </div>
+    <div class="row, text-left">
+        @using (Html.BeginForm("Index", "Norms", FormMethod.Get))
+        {
+            <fieldset>
+                Изделие: @Html.TextBox("productName", Model.ProductionName)
+                Сырье: @Html.TextBox("rawName", Model.RawName)
+                Количество сырья: @Html.TextBox("quantity", Model.Quantity)
+                <input class="btn btn-outline-dark" type="submit" value="Найти" />
+            </fieldset>
+        }
+    </div>
+</div>
 <table class="table">
     <thead>
         <tr>
             <th>
+                <a asp-action="Index" asp-route-sortState=@Model.SortViewModel.NormProductNameSort>
+                    @Html.DisplayNameFor(model => model.Norms.FirstOrDefault().Product.ProductName)
+                </a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortState=@Model.SortViewModel.NormRawNameSort>
+                    @Html.DisplayNameFor(model => model.Norms.FirstOrDefault().Raw.RawName)
+                </a>
+            </th>
+            <th>
                 <a asp-action="Index" asp-route-sortState=@Model.SortViewModel.NormQuantitySort>
-                 @Html.DisplayNameFor(model => model.Norms.FirstOrDefault().Quantity)</a>
-</th>
-            <th><a asp-action="Index" asp-route-sortState=@Model.SortViewModel.NormProductNameSort>
-                @Html.DisplayNameFor(model => model.Norms.FirstOrDefault().Product.ProductName)</a>
-</th>
-            <th><a asp-action="Index" asp-route-sortState=@Model.SortViewModel.NormRawNameSort>
-                @Html.DisplayNameFor(model => model.Norms.FirstOrDefault().Raw.RawName)</a>
-</th>
+                    @Html.DisplayNameFor(model => model.Norms.FirstOrDefault().Quantity)
+                </a>
+            </th>
+
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Norms)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Product.ProductName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Raw.RawName)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.NormId">Изменить</a> |
-                    <a asp-action="Delete" asp-route-id="@item.NormId">Удалить</a>
-                </td>
-            </tr>
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Raw.RawName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                <a class="btn btn-outline-dark" asp-action="Edit" asp-route-id="@item.NormId">Изменить</a> |
+                <a class="btn btn-outline-dark" asp-action="Delete" asp-route-id="@item.NormId">Удалить</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

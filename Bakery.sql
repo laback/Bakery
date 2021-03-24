@@ -65,7 +65,7 @@ CREATE TABLE [ProductsProductions] (
 )
 GO
 
-ALTER TABLE [Norms] ADD FOREIGN KEY ([rowId]) REFERENCES [Raw] ([rawId])
+ALTER TABLE [Norms] ADD FOREIGN KEY ([rowId]) REFERENCES [Raws] ([rawId])
 GO
 
 ALTER TABLE [Norms] ADD FOREIGN KEY ([productId]) REFERENCES [Products] ([productId])

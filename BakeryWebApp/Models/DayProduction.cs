@@ -11,7 +11,7 @@ namespace BakeryWebApp
         [Key]
         public int DayProductionId { get; set; }
         [DataType(DataType.Date)]
-        [Display(Name = "Число")]
+        [Display(Name = "Дата")]
         [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? Date { get; set; }
 
