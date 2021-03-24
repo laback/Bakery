@@ -34,6 +34,12 @@ namespace BakeryWebApp.Controllers
         {
             List<ProductsMaterial> globalMat = new List<ProductsMaterial>();
             var dayPlan = _context.DayPlans.Where(d => d.Date.Equals(date)).FirstOrDefault();
+            if(dayPlan == null)
+            {
+                _context.DayPlans.Add(new DayPlan { Date = date });
+                _context.SaveChanges();
+                dayPlan = _context.DayPlans.Where(d => d.Date.Equals(date)).FirstOrDefault();
+            }
             var productsPlans = _context.ProductsPlans.Where(d => d.DayPlanId == dayPlan.DayPlanId).ToList();
             foreach (ProductsPlan pp in productsPlans)
             {
@@ -65,6 +71,12 @@ namespace BakeryWebApp.Controllers
         {
             List<Norm> globalNorm = new List<Norm>();
             var dayPlan = _context.DayPlans.Where(d => d.Date.Equals(date)).FirstOrDefault();
+            if (dayPlan == null)
+            {
+                _context.DayPlans.Add(new DayPlan { Date = date });
+                _context.SaveChanges();
+                dayPlan = _context.DayPlans.Where(d => d.Date.Equals(date)).FirstOrDefault();
+            }
             var productsPlans = _context.ProductsPlans.Where(d => d.DayPlanId == dayPlan.DayPlanId).ToList();
             foreach (ProductsPlan pp in productsPlans)
             {

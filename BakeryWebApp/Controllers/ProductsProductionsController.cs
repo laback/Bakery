@@ -89,15 +89,9 @@ namespace BakeryWebApp.Controllers
             }
             ProductsProduction productsProduction = productProdactionViewModel.ProductsProduction;
             productsProduction.DayProductionId = dayProduction.DayProductionId;
-            if (ModelState.IsValid)
-            {
-                _context.Add(productsProduction);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["DayProductionId"] = new SelectList(_context.DayProductions, "DayProductionId", "Date");
-            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductName");
-            return View(productsProduction);
+            _context.Add(productsProduction);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Edit(int? id)
@@ -137,30 +131,23 @@ namespace BakeryWebApp.Controllers
             }
             ProductsProduction productsProduction = productProdactionViewModel.ProductsProduction;
             productsProduction.DayProductionId = dayProduction.DayProductionId;
-
-            if (ModelState.IsValid)
+            try
             {
-                try
-                {
-                    _context.Update(productsProduction);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProductsProductionExists(productsProduction.ProductProductionId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                _context.Update(productsProduction);
+                await _context.SaveChangesAsync();
             }
-            ViewData["DayProductionId"] = new SelectList(_context.DayProductions, "DayProductionId", "Date");
-            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductName");
-            return View(productsProduction);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProductsProductionExists(productsProduction.ProductProductionId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Delete(int? id)

@@ -8,12 +8,14 @@
                 Дневной отчёт
             </h1>
         </div>
+        
         @using (Html.BeginForm("Index", "Report", FormMethod.Get))
         {
-            <label>Дата</label>
-            <input asp-for="DailyDate" />
-            <input class="btn btn-outline-dark" type="submit" value="Сформировать суточный отчёт" />
+                <label>Дата</label>
+                <input asp-for="DailyDate" />
+                <input class="btn btn-outline-dark" type="submit" value="Сформировать суточный отчёт" />
         }
+        <div class="text-left">Плановые затраты сырья и материалов в заданную дату</div>
     </div>
 
     <div class="col-md-4">
@@ -30,6 +32,7 @@
             <input asp-for="EndDate" />
             <input class="btn btn-outline-dark" type="submit" value="Сформировать отчёт периода" />
         }
+        <div class="text-left">Плановые затраты сырья и материалов в заданный период</div>
     </div>
 
     <div class="col-md-4">
@@ -42,6 +45,7 @@
         {
             <input class="btn btn-outline-dark" type="submit" value="Сформировать статистику" />
         }
+        <div class="text-left">Плановые затраты сырья и материалов за все время</div>
     </div>
 
 </div>
